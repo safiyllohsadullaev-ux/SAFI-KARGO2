@@ -1,5 +1,5 @@
 import shutil
-from datetime import timedelta
+from datetime import datetime, time, timedelta, timezone
 from pathlib import Path
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
@@ -189,7 +189,12 @@ def dashboard(user: User = Depends(staff_user), db: Session = Depends(get_db)):
     days = []
     for offset in range(6, -1, -1):
         day = (utcnow() - timedelta(days=offset)).date()
-        count = db.query(User).filter(User.role == "client", func.date(User.created_at) == str(day)).count()
+        start = datetime.combine(day, time.min, tzinfo=timezone.utc)
+        count = db.query(User).filter(
+            User.role == "client",
+            User.created_at >= start,
+            User.created_at < start + timedelta(days=1),
+        ).count()
         days.append({"date": str(day), "count": count})
     return {
         "clients": clients,
