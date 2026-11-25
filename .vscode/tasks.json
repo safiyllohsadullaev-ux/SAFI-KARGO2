@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "SAFI KARGO: API",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe -m uvicorn app.main:app --reload --port 8000",
+      "options": { "cwd": "${workspaceFolder}\\backend" },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "safi-api",
+        "pattern": { "regexp": "^$" },
+        "background": { "activeOnStart": true, "beginsPattern": ".", "endsPattern": "Uvicorn running" }
+      }
+    },
+    {
+      "label": "SAFI KARGO: Web",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}\\frontend",
+        "env": { "Path": "C:\\Program Files\\nodejs;${env:Path}" }
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "safi-web",
+        "pattern": { "regexp": "^$" },
+        "background": { "activeOnStart": true, "beginsPattern": ".", "endsPattern": "Local:" }
+      }
+    }
+  ]
+}

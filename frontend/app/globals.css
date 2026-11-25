@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --safe-bottom: env(safe-area-inset-bottom);
+}
+
+* { box-sizing: border-box; }
+
+html, body { max-width: 100%; overflow-x: hidden; }
+
+body {
+  margin: 0;
+  background: #FAF8F6;
+  color: #18181B;
+  font-family: var(--font-sans), "Segoe UI", sans-serif;
+}
+
+button, input, textarea, select { font: inherit; }
+
+button { cursor: pointer; }
+
+:focus-visible {
+  outline: 2px solid #E53935;
+  outline-offset: 2px;
+}
+
+.card {
+  background: white;
+  border: 1px solid rgba(24, 24, 27, 0.06);
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(24, 24, 27, 0.05);
+}
+
+.field {
+  width: 100%;
+  border: 1px solid #E7E5E4;
+  background: white;
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: #18181B;
+}
+
+.field:focus { border-color: #E53935; outline: none; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-weight: 700;
+  transition: transform .15s ease, background .15s ease, opacity .15s ease;
+}
+
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.btn-primary { background: #E53935; color: white; }
+.btn-primary:hover { background: #B71C1C; }
+.btn-ghost { background: #F4F4F5; color: #18181B; }
+.btn-dark { background: #18181B; color: white; }
+
+.skeleton {
+  background: linear-gradient(90deg, #F4F4F5 25%, #fff 50%, #F4F4F5 75%);
+  background-size: 200% 100%;
+  animation: shine 1.2s infinite;
+  border-radius: 16px;
+}
+
+@keyframes shine { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }

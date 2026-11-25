@@ -1,0 +1,12 @@
+{
+  "name": "SAFI KARGO",
+  "short_name": "SAFI KARGO",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF8F6",
+  "theme_color": "#E53935",
+  "lang": "tg",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

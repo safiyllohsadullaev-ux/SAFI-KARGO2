@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: safi
+      POSTGRES_PASSWORD: safi
+      POSTGRES_DB: safi_kargo
+    ports:
+      - "5432:5432"
+    volumes:
+      - safi_pg:/var/lib/postgresql/data
+volumes:
+  safi_pg:
