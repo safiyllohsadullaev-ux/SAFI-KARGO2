@@ -50,7 +50,7 @@ export default function HomePage() {
     ? [...data.tariffs].sort((a, b) => a.price_per_kg - b.price_per_kg)[0]
     : null;
   const rate = cheapest
-    ? `${t("fromRate")} ${trimNumber(cheapest.price_per_kg)} ${cheapest.currency}${t("perKg")}`
+    ? `${t("fromRate")} ${trimNumber(cheapest.price_per_kg)} ${cheapest.currency} ${t("perKg")}`
     : t("noTariffs");
   const consignee = warehouse?.recipient_name || clientId;
   const warehousePhone = warehouse?.phone || t("notSet");
