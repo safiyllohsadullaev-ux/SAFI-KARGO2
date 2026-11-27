@@ -117,14 +117,14 @@ export function Shell({ children, mode }: { children: React.ReactNode; mode: "cl
         <main className="mx-auto w-full max-w-6xl px-4 pb-28 pt-4 lg:pb-10">{children}</main>
       </div>
       {mode === "client" ? (
-        <nav className="fixed inset-x-3 bottom-3 z-40 grid grid-cols-5 rounded-full bg-white px-1 py-1 shadow-nav lg:hidden" style={{ marginBottom: "var(--safe-bottom)" }}>
+        <nav className="glass-dock fixed inset-x-3 bottom-3 z-40 grid grid-cols-5 rounded-full px-1 py-1 lg:hidden" style={{ marginBottom: "var(--safe-bottom)" }}>
           {clientNav.map((item) => {
             const active = pathname === item.href || (item.href !== "/home" && pathname.startsWith(item.href));
             const Icon = item.icon;
             const count = item.key === "orders" ? badges.orders : item.key === "messages" ? badges.messages : 0;
             return (
               <Link key={item.href} href={item.href} className="relative flex flex-col items-center gap-0.5 py-2 text-[10px] font-bold">
-                {active ? <motion.span layoutId="tab" className="absolute inset-1 rounded-full bg-red-50" /> : null}
+                {active ? <motion.span layoutId="tab" className="glass-dock-pill absolute inset-1 rounded-full" /> : null}
                 <Icon size={18} className={`relative ${active ? "text-brand" : "text-mute"}`} />
                 <span className={`relative ${active ? "text-brand" : "text-mute"}`}>{t(item.key)}</span>
                 {count > 0 ? <em className="absolute right-2 top-1 rounded-full bg-brand px-1 text-[9px] not-italic text-white">{count}</em> : null}
