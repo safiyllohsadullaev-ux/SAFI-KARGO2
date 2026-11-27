@@ -77,22 +77,42 @@ button { cursor: pointer; }
 .no-scrollbar { scrollbar-width: none; }
 
 .hero-card {
-  animation: hero-glow 5.5s ease-in-out infinite;
+  animation: hero-glow 4.6s ease-in-out infinite;
 }
 
 .hero-photo {
-  transform-origin: 78% center;
-  animation: hero-drift 22s ease-in-out infinite alternate;
+  transform-origin: 74% 42%;
+  animation: hero-drift 12s ease-in-out infinite alternate;
+}
+
+.hero-aurora {
+  background:
+    radial-gradient(90% 80% at 12% 100%, rgba(255, 196, 140, 0.34), transparent 52%),
+    radial-gradient(70% 60% at 92% 8%, rgba(255, 255, 255, 0.2), transparent 46%);
+  animation: hero-aurora 7s ease-in-out infinite alternate;
 }
 
 .hero-sheen {
-  background: linear-gradient(105deg, transparent 32%, rgba(255, 255, 255, 0.34) 48%, transparent 64%);
-  transform: translateX(-130%);
-  animation: hero-sheen 7.5s ease-in-out infinite;
+  background: linear-gradient(108deg, transparent 38%, rgba(255, 255, 255, 0.08) 45%, rgba(255, 255, 255, 0.62) 50%, rgba(255, 255, 255, 0.08) 55%, transparent 62%);
+  transform: translateX(-145%);
+  animation: hero-sheen 5.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.hero-sheen-warm {
+  background: linear-gradient(100deg, transparent 44%, rgba(255, 214, 170, 0.34) 50%, transparent 56%);
+  animation-delay: 2.15s;
+}
+
+.hero-flags {
+  animation: hero-float 3.8s ease-in-out infinite;
 }
 
 .hero-copy {
-  animation: hero-copy 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: hero-copy 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-mark {
+  animation: hero-copy 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.18s both;
 }
 
 .glass-dock {
@@ -115,30 +135,43 @@ button { cursor: pointer; }
 }
 
 @keyframes hero-drift {
-  from { transform: scale(1.05) translate3d(0, 0, 0); }
-  to { transform: scale(1.14) translate3d(-3%, 0, 0); }
+  from { transform: scale(1.08) translate3d(2%, 1%, 0); }
+  to { transform: scale(1.18) translate3d(-4%, -2%, 0); }
+}
+
+@keyframes hero-aurora {
+  from { opacity: 0.45; transform: translate3d(0, 4%, 0) scale(1); }
+  to { opacity: 1; transform: translate3d(0, -2%, 0) scale(1.08); }
 }
 
 @keyframes hero-sheen {
-  0%, 58% { transform: translateX(-130%); }
-  100% { transform: translateX(130%); }
+  0%, 36% { transform: translateX(-145%); }
+  72%, 100% { transform: translateX(145%); }
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 
 @keyframes hero-copy {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: none; }
 }
 
 @keyframes hero-glow {
-  0%, 100% { box-shadow: 0 18px 40px rgba(183, 28, 28, 0.28); }
-  50% { box-shadow: 0 24px 52px rgba(183, 28, 28, 0.42); }
+  0%, 100% { box-shadow: 0 16px 34px rgba(183, 28, 28, 0.24), 0 0 0 rgba(255, 140, 110, 0); }
+  50% { box-shadow: 0 28px 58px rgba(183, 28, 28, 0.48), 0 0 32px rgba(255, 130, 100, 0.32); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-card,
   .hero-photo,
+  .hero-aurora,
   .hero-sheen,
-  .hero-copy {
+  .hero-flags,
+  .hero-copy,
+  .hero-mark {
     animation: none;
   }
 }

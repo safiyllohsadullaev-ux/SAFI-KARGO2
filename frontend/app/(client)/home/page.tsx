@@ -20,7 +20,7 @@ type HomeData = {
 };
 
 const marks: Record<string, { src: string; wide?: boolean }> = {
-  pinduoduo: { src: "/brands/pinduoduo.png" },
+  pinduoduo: { src: "/brands/pinduoduo.png?v=2" },
   taobao: { src: "/brands/taobao.png" },
   "1688": { src: "/brands/1688.png" },
   poizon: { src: "/brands/poizon.png", wide: true },
@@ -82,11 +82,13 @@ export default function HomePage() {
         <div className="space-y-4">
           <section className="hero-card relative isolate min-h-[188px] overflow-hidden rounded-[28px] text-white sm:min-h-[220px]">
             <img src="/hero-truck.jpg" alt="" className="hero-photo absolute inset-0 -z-10 h-full w-full object-cover object-[78%_center]" />
-            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#B71C1C] from-10% via-[#D32F2F]/80 via-50% to-[#7F1D1D]/10" />
+            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#B71C1C] from-10% via-[#D32F2F]/75 via-48% to-[#7F1D1D]/5" />
+            <div className="hero-aurora pointer-events-none absolute inset-0 -z-10" />
             <div className="hero-sheen pointer-events-none absolute inset-0 z-10" />
+            <div className="hero-sheen hero-sheen-warm pointer-events-none absolute inset-0 z-10" />
             <div className="hero-copy relative z-20 flex min-h-[188px] flex-col justify-between p-4 sm:min-h-[220px] sm:p-6">
               <div className="flex justify-end">
-                <div className="flex items-center gap-1.5 rounded-full bg-black/20 px-2 py-1 backdrop-blur-sm">
+                <div className="hero-flags flex items-center gap-1.5 rounded-full bg-black/20 px-2 py-1 backdrop-blur-sm">
                   <ChinaFlag />
                   <span className="text-[10px] text-white/70">|</span>
                   <TajikFlag />
@@ -103,7 +105,7 @@ export default function HomePage() {
                 {notice ? <p className="mt-0.5 text-xs font-medium text-white/80">{notice}</p> : null}
               </div>
             </div>
-            <div className="pointer-events-none absolute bottom-3 right-4 z-20 text-right leading-none drop-shadow-md">
+            <div className="hero-mark pointer-events-none absolute bottom-3 right-4 z-20 text-right leading-none drop-shadow-md">
               <div className="text-[11px] font-extrabold tracking-[0.2em]">SAFI</div>
               <div className="mt-1 text-[10px] font-bold tracking-[0.24em] text-white/85">KARGO</div>
             </div>
