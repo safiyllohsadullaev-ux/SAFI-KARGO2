@@ -623,6 +623,29 @@ def request_otp(db: Session, phone: str, purpose: str) -> dict:
     return result
 
 
+def confirmed_supabase_email(access_token: str) -> str:
+    base = settings.supabase_url.strip().rstrip("/")
+    key = (settings.supabase_publishable_key or settings.supabase_anon_key).strip()
+    if not base or not key:
+        raise HTTPException(status_code=503, detail="email_not_configured")
+    try:
+        response = httpx.get(
+            f"{base}/auth/v1/user",
+            headers={"Authorization": f"Bearer {access_token}", "apikey": key},
+            timeout=10,
+        )
+    except httpx.HTTPError:
+        raise HTTPException(status_code=503, detail="email_not_configured")
+    if response.status_code != 200:
+        raise HTTPException(status_code=403, detail="email_not_confirmed")
+    body = response.json()
+    email = str(body.get("email") or "").strip().lower()
+    confirmed = body.get("email_confirmed_at") or body.get("confirmed_at")
+    if not email or not confirmed:
+        raise HTTPException(status_code=403, detail="email_not_confirmed")
+    return email
+
+
 def consume_otp(db: Session, phone: str, purpose: str, code: str) -> None:
     phone = normalize_phone(phone)
     row = (

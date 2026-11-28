@@ -2,6 +2,24 @@ def auth_header(token):
     return {"Authorization": f"Bearer {token}"}
 
 
+def test_unconfirmed_email_cannot_open_cabinet(client):
+    response = client.post(
+        "/api/auth/register",
+        json={
+            "first_name": "Али",
+            "last_name": "Тест",
+            "phone": "+992900111099",
+            "password": "SecretPass1",
+            "password_confirm": "SecretPass1",
+            "email": "ali@example.com",
+            "supabase_access_token": "not-a-real-token",
+        },
+    )
+    assert response.status_code == 503
+    assert response.json()["detail"] == "email_not_configured"
+    assert "access_token" not in response.json()
+
+
 def test_register_unique_ids_and_privacy(client):
     from tests.conftest import register
 

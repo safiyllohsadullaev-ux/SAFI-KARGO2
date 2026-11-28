@@ -11,7 +11,7 @@ from app.security import (
     normalize_phone,
     verify_password,
 )
-from app.services import allocate, allow, badges, branch_out, consume_otp, request_otp, user_out
+from app.services import allocate, allow, badges, branch_out, confirmed_supabase_email, consume_otp, request_otp, user_out
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -28,7 +28,9 @@ class RegisterIn(BaseModel):
     password: str = Field(min_length=8, max_length=128)
     password_confirm: str
     branch_id: int | None = None
-    otp: str
+    email: str = ""
+    supabase_access_token: str = ""
+    otp: str = ""
 
 
 class LoginIn(BaseModel):
@@ -65,7 +67,13 @@ def register(payload: RegisterIn, db: Session = Depends(get_db)):
     if payload.password != payload.password_confirm:
         raise HTTPException(status_code=400, detail="password_mismatch")
     phone = normalize_phone(payload.phone)
-    consume_otp(db, phone, "register", payload.otp)
+    token = payload.supabase_access_token.strip()
+    if token:
+        confirmed = confirmed_supabase_email(token)
+        if payload.email.strip().lower() != confirmed:
+            raise HTTPException(status_code=403, detail="email_not_confirmed")
+    else:
+        consume_otp(db, phone, "register", payload.otp)
     if db.query(User).filter(User.phone == phone).first():
         raise HTTPException(status_code=409, detail="phone_taken")
     branch_id = None

@@ -21,6 +21,9 @@ class Settings(BaseSettings):
     admin_first_name: str = "Super"
     admin_last_name: str = "Admin"
     sms_webhook_url: str = ""
+    supabase_url: str = ""
+    supabase_anon_key: str = ""
+    supabase_publishable_key: str = ""
     dev_otp_reveal: bool = False
     cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
     company_tz: str = "Asia/Dushanbe"
